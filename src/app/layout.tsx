@@ -5,7 +5,7 @@ import { ApolloClientProvider } from "@/providers/ApolloProvider";
 
 const geistSans = Roboto({
   variable: "--font-roboto",
-  // subsets: ["latin"],
+  subsets: ["latin"],
   weight: '100'
 });
 
