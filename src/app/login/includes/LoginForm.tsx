@@ -1,10 +1,11 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { LOGIN } from '@/graphql/auth';
+import { LOGIN } from '@/graphql';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import Cookies from 'js-cookie';
 import * as Yup from 'yup';
+import { FaSpinner } from 'react-icons/fa';
 
 export const LoginForm = () => {
   const [loading, setLoading] = useState(false);
@@ -56,10 +57,10 @@ export const LoginForm = () => {
           if (response) {
             const { token } = response.data.authLogin;
             console.log({token});
-            setLoading(false)
+            // setLoading(false)
             resetForm()
             Cookies.set('token', token);
-            window.location.href = '/';
+            window.location.href = '/admin';
           } else {
             setLoading(false);
           }
@@ -86,7 +87,7 @@ export const LoginForm = () => {
           <ErrorMessage
             name='nickName'
             component='p'
-            className='input---error'
+            className='text-red-500 text-sm mt-1 pl-2'
           />
         </div>
         <div className='mb-6'>
@@ -106,16 +107,17 @@ export const LoginForm = () => {
           <ErrorMessage
             name='password'
             component='p'
-            className='input---error'
+            className='text-red-500 text-sm mt-1 pl-2'
           />
         </div>
         <div className='flex items-center justify-between'>
           <button
-            className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
             type='submit'
             disabled={loading}
+            style={{ width: '100px', height: '40px' }}
           >
-            Ingresar
+            {loading ? <FaSpinner className="animate-spin mx-auto" /> : 'Ingresar'}
           </button>
         </div>
       </Form>

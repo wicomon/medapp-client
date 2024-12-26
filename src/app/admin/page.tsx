@@ -1,5 +1,6 @@
 
 const AdminPage = () => {
+  // console.log('render')
   return (
     <div>AdminPage</div>
   )
