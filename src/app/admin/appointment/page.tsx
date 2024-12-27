@@ -4,9 +4,13 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import esLocale from '@fullcalendar/core/locales/es';
+import { useContext } from 'react';
+import { UserContext } from '@/app/context/user/UserContext';
 
 
 const AdminAppointmentPage = () => {
+  const {user} = useContext(UserContext);
+  console.log({user})
   const events = [
     {
       title: 'cita con Dr. Smith',

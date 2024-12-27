@@ -4,6 +4,7 @@ import Sidebar from './includes/Sidebar';
 import Header from './includes/Header';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import { ModuleRegistry, AllCommunityModule } from 'ag-grid-community';
+import { UserProvider } from '../context/user/UserProvider';
 ModuleRegistry.registerModules([AllCommunityModule]);
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
@@ -33,14 +34,16 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   }, [isSidebarOpen]);
 
   return (
-    <div className='flex h-screen overflow-y-hidden'>
-      <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-      <div className='flex flex-col flex-1'>
-        <Header toggleSidebar={toggleSidebar} />
-        <main className='flex-1 p-6 bg-gray-100 overflow-y-auto'>
-          {children}
-        </main>
+    <UserProvider>
+      <div className='flex h-screen overflow-y-hidden'>
+        <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+        <div className='flex flex-col flex-1'>
+          <Header toggleSidebar={toggleSidebar} />
+          <main className='flex-1 p-6 bg-gray-100 overflow-y-auto'>
+            {children}
+          </main>
+        </div>
       </div>
-    </div>
+    </UserProvider>
   );
 }
