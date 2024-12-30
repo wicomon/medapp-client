@@ -31,7 +31,7 @@ export const PatientTable = ({ patients }: IProps) => {
   ];
 
   return (
-    <div>
+    <div className='patient-table-container'>
       <div className='mb-4 flex justify-end'>
         <input
           type='text'

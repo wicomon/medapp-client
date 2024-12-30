@@ -1,30 +1,19 @@
 'use client';
-import { GET_PERSON_BY_DOCTOR_ID } from '@/graphql';
-import { useQuery } from '@apollo/client';
-import { PatientTable } from './includes/PatientTable';
-import { IPatient } from '@/types';
+import { useContext } from 'react';
+import { PatientPage } from './includes/PatientPage';
+import { UserContext } from '@/context/user/UserContext';
 
 const Person = () => {
   // get all patients query
-  const { data, loading, error } = useQuery<{ patientFindAll: IPatient[] }>(
-    GET_PERSON_BY_DOCTOR_ID,
-    {
-      variables: { patientFindAllId: 1 },
-    }
-  );
-  // console.log(data);
-  
+   const { user } = useContext(UserContext);
+
   return (
     <div>
-      {loading ? (
-        <p>loading...</p>
-      ) : error ? (
-        <p>error...</p>
-      ) : data && data.patientFindAll ? (
-        <PatientTable patients={data.patientFindAll} />
-      ) : (
-        <p>No data</p>
-      )}
+      {
+        (user && user.id!=0) ? 
+          <PatientPage userId={user.id} />
+        : null
+      }
     </div>
   );
 };

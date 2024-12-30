@@ -5,12 +5,11 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import esLocale from '@fullcalendar/core/locales/es';
 import { useContext } from 'react';
-import { UserContext } from '@/app/context/user/UserContext';
-
+import { UserContext } from '@/context/user/UserContext';
 
 const AdminAppointmentPage = () => {
-  const {user} = useContext(UserContext);
-  console.log({user})
+  const { user } = useContext(UserContext);
+  // console.log({ user });
   const events = [
     {
       title: 'cita con Dr. Smith',
@@ -24,29 +23,28 @@ const AdminAppointmentPage = () => {
     },
     // Add more events here
   ];
-  console.log(new Date(1735224962693).toLocaleString())
+  // console.log(new Date(1735224962693).toLocaleString());
   return (
-    <div className="p-4">
-    <h1 className="text-2xl font-bold mb-4">Calendario de citas</h1>
-    <div className="bg-white shadow rounded-lg p-4">
-      <FullCalendar
-        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        initialView="dayGridMonth"
-        events={events}
-        headerToolbar={{
-          left: 'prev,next today',
-          center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay',
-        }}
-        locale={esLocale}
-        height="auto"
-        viewClassNames="w-full bg-white shadow rounded-lg p-4"
-        // themeSystem='United'
-      />
+    <div className='p-4'>
+      <h1 className='text-2xl font-bold mb-4'>Calendario de citas</h1>
+      <div className='bg-white shadow rounded-lg p-4'>
+        <FullCalendar
+          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+          initialView='dayGridMonth'
+          events={events}
+          headerToolbar={{
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay',
+          }}
+          locale={esLocale}
+          height='auto'
+          viewClassNames='w-full bg-white shadow rounded-lg p-4'
+          // themeSystem='United'
+        />
+      </div>
     </div>
-  </div>
   );
 };
-
 
 export default AdminAppointmentPage;

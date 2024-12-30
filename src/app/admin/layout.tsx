@@ -4,7 +4,8 @@ import Sidebar from './includes/Sidebar';
 import Header from './includes/Header';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import { ModuleRegistry, AllCommunityModule } from 'ag-grid-community';
-import { UserProvider } from '../context/user/UserProvider';
+import { UserProvider } from '@/context/user/UserProvider';
+
 ModuleRegistry.registerModules([AllCommunityModule]);
 
 export default function AdminLayout({ children }: { children: ReactNode }) {

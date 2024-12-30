@@ -56,7 +56,7 @@ export const LoginForm = () => {
           });
           if (response) {
             const { token } = response.data.authLogin;
-            console.log({token});
+            // console.log({token});
             // setLoading(false)
             resetForm()
             Cookies.set('token', token);
