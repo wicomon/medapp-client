@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   ErrorMessage,
   Field,
@@ -5,7 +6,9 @@ import {
   useField,
   useFormikContext,
 } from "formik";
-import { useEffect } from "react";
+import Datetime from 'react-datetime';
+import moment from 'moment';
+import 'react-datetime/css/react-datetime.css';
 
 export interface InputType1 {
   label: string;
@@ -33,6 +36,13 @@ export interface InputTypeDatePicker {
   minDate?: boolean;
   [x: string]: any;
 }
+
+interface FormikDateTimePickerProps {
+  label: string;
+  name: string;
+  className?: string;
+}
+
 const inputStyle = 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline';
 const formSelectStyle = '';
 
@@ -245,6 +255,30 @@ export const FormikDatePicker = ({ label, ...props }: InputTypeDatePicker) => {
         component="p"
         className="text-red-500 text-xm italic"
       />
+    </div>
+  );
+};
+
+export const FormikDateTimePicker: React.FC<FormikDateTimePickerProps> = ({ label, name, className }) => {
+  const { setFieldValue } = useFormikContext();
+  const [field, meta] = useField(name);
+
+  return (
+    <div className="mb-4">
+      <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor={name}>
+        {label}
+      </label>
+      <Datetime
+        // id={name}
+        {...field}
+        value={field.value ? field.value : ''}
+        onChange={(val) => setFieldValue(name, val)}
+        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500 focus:ring-2 focus:ring-blue-500 ${className}`}
+        dateFormat="DD-MM-YYYY"
+      />
+      {meta.touched && meta.error ? (
+        <div className="text-red-500 text-sm mt-1">{meta.error}</div>
+      ) : null}
     </div>
   );
 };

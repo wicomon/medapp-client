@@ -20,3 +20,10 @@ export const GET_PERSON_BY_DOCTOR_ID = gql`
     }
   }
 `;
+
+
+export const CREATE_PATIENT = gql`
+mutation PatientCreate($createPatientInput: CreatePatientInput!) {
+  patientCreate(createPatientInput: $createPatientInput)
+}
+`;

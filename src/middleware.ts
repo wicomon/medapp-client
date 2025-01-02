@@ -18,7 +18,7 @@ export async function middleware(request: NextRequest) {
     } else {
       const { data } = await isLoged(token || '');
       // console.log({data})
-      if (!data.authValidateToken) {
+      if (!data || !data.authValidateToken) {
         request.cookies.delete('token');
         return NextResponse.redirect(new URL('/login', request.url));
       }
