@@ -8,22 +8,41 @@ export const GET_PERSON_BY_DOCTOR_ID = gql`
       lastName
       email
       image
-      isActive
-      isDeleted
-      doctorId
-      createdAt
-      createdBy
-      updatedAt
-      updatedBy
-      deletedAt
-      deletedBy
+      birth
+      birthString
+      allergies
+      address
+      gender
+      phone2
+      phone
     }
   }
 `;
 
-
 export const CREATE_PATIENT = gql`
-mutation PatientCreate($createPatientInput: CreatePatientInput!) {
-  patientCreate(createPatientInput: $createPatientInput)
-}
+  mutation PatientCreate($createPatientInput: CreatePatientInput!) {
+    patientCreate(createPatientInput: $createPatientInput)
+  }
+`;
+
+export const PATIENT_BY_ID = gql`
+  query PatientFindById($patientFindByIdId: Int!) {
+    patientFindById(id: $patientFindByIdId) {
+      id
+      firstName
+      lastName
+      email
+      image
+      birth
+      birthString
+      isActive
+      isDeleted
+      doctorId
+      allergies
+      address
+      gender
+      phone2
+      phone
+    }
+  }
 `;

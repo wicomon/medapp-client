@@ -40,7 +40,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
         <div className='flex flex-col flex-1'>
           <Header toggleSidebar={toggleSidebar} />
-          <main className='flex-1 p-6 bg-gray-100 overflow-y-auto'>
+          <main className='flex-1 py-3 px-3 sm:px-4 md:px-6 bg-gray-100 overflow-y-auto'>
             {children}
           </main>
         </div>

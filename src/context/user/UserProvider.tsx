@@ -12,7 +12,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   }>(GET_USER_BY_TOKEN);
 
   useEffect(() => {
-    console.log('render');
+    // console.log('render');
     getUser();
   }, []);
 

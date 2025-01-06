@@ -4,6 +4,14 @@ export interface IPatient {
   lastName: string;
   email: string;
   image?: string;
+  birth: number;
+  birthString: string;
+  allergies?: string;
+  address: string;
+  gender: string;
+  phone2?: string;
+  phone: string;
+
   isActive: boolean;
   isDeleted: boolean;
   doctorId: number;

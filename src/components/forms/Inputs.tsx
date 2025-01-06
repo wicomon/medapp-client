@@ -7,43 +7,13 @@ import {
   useFormikContext,
 } from "formik";
 import Datetime from 'react-datetime';
-import moment from 'moment';
 import 'react-datetime/css/react-datetime.css';
+import { inputStyle } from "@/utils/customTwStyles";
+import { FormikDateTimePickerProps, InputType1, InputType2, InputTypeDatePicker } from "@/types/input.interface";
 
-export interface InputType1 {
-  label: string;
-  name: string;
-  className?: string;
-  type?: "email" | "text" | "password" | "number";
-  placeholder?: string;
-  [x: string]: any;
-}
-export interface InputType2 {
-  label: string;
-  name: string;
-  className?: string;
-  type?: "email" | "text" | "password" | "number";
-  placeholder?: string;
-  [x: string]: any;
-}
-export interface InputTypeDatePicker {
-  label: string;
-  name: string;
-  className?: string;
-  placeholder?: string;
-  url?: string;
-  initiaValue?: string;
-  minDate?: boolean;
-  [x: string]: any;
-}
 
-interface FormikDateTimePickerProps {
-  label: string;
-  name: string;
-  className?: string;
-}
 
-const inputStyle = 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline';
+
 const formSelectStyle = '';
 
 export const FormikTextInput = ({
@@ -259,7 +229,7 @@ export const FormikDatePicker = ({ label, ...props }: InputTypeDatePicker) => {
   );
 };
 
-export const FormikDateTimePicker: React.FC<FormikDateTimePickerProps> = ({ label, name, className }) => {
+export const FormikDateTimePicker = ({ label, name, className }: FormikDateTimePickerProps)  => {
   const { setFieldValue } = useFormikContext();
   const [field, meta] = useField(name);
 
@@ -273,8 +243,10 @@ export const FormikDateTimePicker: React.FC<FormikDateTimePickerProps> = ({ labe
         {...field}
         value={field.value ? field.value : ''}
         onChange={(val) => setFieldValue(name, val)}
-        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500 focus:ring-2 focus:ring-blue-500 ${className}`}
+        className={`shadow appearance-none border rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500 focus:ring-2 focus:ring-blue-500 ${className}`}
         dateFormat="DD-MM-YYYY"
+        initialViewDate={new Date(2000, 0, 1)}
+        locale="es"
       />
       {meta.touched && meta.error ? (
         <div className="text-red-500 text-sm mt-1">{meta.error}</div>

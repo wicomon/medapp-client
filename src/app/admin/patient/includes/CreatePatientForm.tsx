@@ -92,8 +92,40 @@ export const CreatePatientForm = ({onClose, loadData}: IProps) => {
           />
         </div>
         <div className='mb-2'>
+        <FormikTextInput
+            label='Telefono'
+            name='phone'
+            className=''
+            type='text'
+          />
+        </div>
+        <div className='mb-2'>
+        <FormikTextInput
+            label='Telefono adicional'
+            name='phone2'
+            className=''
+            type='text'
+          />
+        </div>
+        <div className='mb-2'>
+        <FormikTextInput
+            label='Dirección'
+            name='address'
+            className=''
+            type='text'
+          />
+        </div>
+        <div className='mb-2'>
+        <FormikTextInput
+            label='Género'
+            name='gender'
+            className=''
+            type='text'
+          />
+        </div>
+        <div className='mb-2'>
           <FormikDateTimePicker
-            label='Fecha y Hora de Nacimiento'
+            label='Fecha de Nacimiento'
             name='birth'
             className=''
           />

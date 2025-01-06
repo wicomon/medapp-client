@@ -1,0 +1,1 @@
+export const inputStyle = 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline';
