@@ -14,7 +14,7 @@ import { FormikDateTimePickerProps, InputType1, InputType2, InputTypeDatePicker 
 
 
 
-const formSelectStyle = '';
+const formSelectStyle = 'shadow border rounded w-full py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline bg-white';
 
 export const FormikTextInput = ({
   label,
@@ -80,15 +80,15 @@ export const FormikSelectInput = ({
     <div className="text-sm">
       <label
         htmlFor={props.id || props.name}
-        className="block text-gray-700 dark:text-gray-400 mb-2"
+        className="block text-gray-700 text-sm font-bold mb-1"
       >
         {label}
       </label>
       <select
         className={
           meta.touched && meta.error
-            ? `${formSelectStyle} ${className}  border-red-300 dark:border-red-300`
-            : `${formSelectStyle} ${className}`
+            ? `${formSelectStyle} ${className}  border-red-300 dark:border-red-300 select-arrow`
+            : `${formSelectStyle} ${className} select-arrow`
         }
         {...field}
         {...props}

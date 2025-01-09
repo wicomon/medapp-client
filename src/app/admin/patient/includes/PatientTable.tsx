@@ -1,8 +1,7 @@
 'use client';
-
 import { useState, useEffect } from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef } from 'ag-grid-community';
+import { ColDef, PaginationChangedEvent } from 'ag-grid-community';
 import { IPatient } from '@/types';
 import { localeText } from '@/utils/agGridLocaleText';
 import { calculateAge } from '@/utils/dates';
@@ -18,6 +17,7 @@ export const PatientTable = ({ patients }: IProps) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredPatients, setFilteredPatients] = useState(patients);
   // console.log(patients);
+  const [pageSize, setPageSize] = useState(10);
 
   const onDelete = (params: IPatient) => {
     console.log(params);
@@ -35,14 +35,14 @@ export const PatientTable = ({ patients }: IProps) => {
 
   const columnDefs: ColDef[] = [
     {
-      headerName: 'Name',
+      headerName: 'Nombres',
       field: 'firstName',
       sortable: true,
       filter: true,
       flex: 1,
     },
     {
-      headerName: 'Last Name',
+      headerName: 'Apellidos',
       field: 'lastName',
       sortable: true,
       filter: true,
@@ -60,7 +60,7 @@ export const PatientTable = ({ patients }: IProps) => {
       field: 'birth',
       sortable: true,
       filter: true,
-      // flex: 1,
+      flex: .5,
       valueFormatter: (params) => '' + calculateAge(params.data.birth),
     },
     {
@@ -95,13 +95,15 @@ export const PatientTable = ({ patients }: IProps) => {
   ];
 
   const getTableHeight = () => {
-    const rowHeight = 60;
-    const headerHeight = 50;
-    const numRows = filteredPatients.length;
-    const tabelHeight = headerHeight + numRows * rowHeight;
-    return tabelHeight < 150 ? 150 : tabelHeight;
+    const rowHeight = 50; // Adjust based on your row height
+    const headerHeight = 50; // Adjust based on your header height
+    return pageSize * rowHeight + headerHeight;
   };
 
+  const changePage = (e: PaginationChangedEvent) => {
+    setPageSize(e.api.paginationGetPageSize());
+  }
+  // console.log({pageSize})
   return (
     <div className='patient-table-container'>
       <div className='mb-4 flex justify-end'>
@@ -121,9 +123,10 @@ export const PatientTable = ({ patients }: IProps) => {
           rowData={filteredPatients}
           columnDefs={columnDefs}
           pagination={true}
-          paginationPageSize={10}
+          paginationPageSize={pageSize}
           localeText={localeText}
           paginationPageSizeSelector={[10, 20, 30]}
+          onPaginationChanged={changePage}
         />
       </div>
     </div>

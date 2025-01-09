@@ -10,9 +10,8 @@ import {
   FaPhone,
   FaMapMarkerAlt,
   FaArrowLeft,
-  FaArrowRight,
-  FaCalendar,
 } from 'react-icons/fa';
+import { PatientActions } from './PatientActions';
 
 export const PatientData = ({ patient }: { patient: IPatient }) => {
   return (
@@ -32,7 +31,7 @@ export const PatientData = ({ patient }: { patient: IPatient }) => {
         <div className='flex flex-col gap-2 md:flex-row md:gap-4 '>
           <div
             id='personal-information'
-            className='bg-white max-w-md shadow rounded-lg p-6 border border-gray-300 md:w-1/3'
+            className='bg-white max-w-md shadow rounded-lg p-6 md:p-6 border border-gray-300 md:w-1/3'
           >
             <div className='flex items-center mb-6'>
               <img
@@ -94,7 +93,7 @@ export const PatientData = ({ patient }: { patient: IPatient }) => {
               id='overview'
               className='w-full h-64 bg-white shadow rounded-lg p-2 md:p-6 border border-gray-300'
             >
-              <h3 className='text-xl font-semibold mb-4'>
+              <h3 className='text-xl font-semibold mb-4 ml-4'>
                 Información adicional
               </h3>
               <div className='grid grid-cols-3 gap-10'>
@@ -102,13 +101,13 @@ export const PatientData = ({ patient }: { patient: IPatient }) => {
                   <label className='block text-sm font-bold mb-1 text-gray-500'>
                     Genero:
                   </label>
-                  <p className='text-lg'>{patient.gender}</p>
+                  <p className='text-md md:text-lg'>{patient.gender==='M' ? 'Masculino' : 'Femenino'}</p>
                 </div>
                 <div className='flex flex-col items-center'>
                   <label className='block text-sm font-bold mb-1 text-gray-500'>
-                    F. Nacimiento:
+                    F. Nac.:
                   </label>
-                  <p className='text-lg'>
+                  <p className='text-md mdtext-lg'>
                     {new Date(patient.birth).toLocaleDateString()}
                   </p>
                 </div>
@@ -116,13 +115,15 @@ export const PatientData = ({ patient }: { patient: IPatient }) => {
                   <label className='block text-sm font-bold mb-1 text-gray-500'>
                     Edad:
                   </label>
-                  <p className='text-lg'>{calculateAge(patient.birth)}</p>
+                  <p className='text-md md:text-lg'>
+                    {calculateAge(patient.birth)}
+                  </p>
                 </div>
                 <div className='flex flex-col items-center'>
                   <label className='block text-sm font-bold mb-1 text-gray-500'>
                     Alergias:
                   </label>
-                  <p className='text-lg'>
+                  <p className='text-md md:text-lg'>
                     {patient.allergies ? patient.allergies : 'Ninguna'}
                   </p>
                 </div>
@@ -130,34 +131,21 @@ export const PatientData = ({ patient }: { patient: IPatient }) => {
                   <label className='block text-sm font-bold mb-1 text-gray-500'>
                     Última Visita:
                   </label>
-                  <p className='text-lg text-ellipsis overflow-hidden whitespace-nowrap w-full md:w-auto'>
-                    {patient.birth}
+                  <p className='text-md md:text-lg text-ellipsis overflow-hidden whitespace-nowrap w-full md:w-auto'>
+                    {new Date(patient.birth).toLocaleDateString()}
                   </p>
                 </div>
                 <div className='flex flex-col items-center'>
                   <label className='block text-sm font-bold mb-1 text-gray-500'>
-                    Siguiente Visita:
+                    Sig Visita:
                   </label>
-                  <p className='text-lg text-ellipsis overflow-hidden whitespace-nowrap w-full md:w-auto'>
-                    {patient.birth}
+                  <p className='text-md md:text-lg text-ellipsis overflow-hidden whitespace-nowrap w-full md:w-auto'>
+                    {new Date(patient.birth).toLocaleDateString()}
                   </p>
                 </div>
               </div>
             </div>
-            <div className='w-full bg-white shadow rounded-lg p-2 md:p-6 border border-gray-300'>
-              <div className='grid grid-cols-1 md:grid-cols-3 gap-1'>
-                <Link
-                  href={'/admin/appointment'}
-                  className='flex flex-row justify-between items-center py-2 px-8 md:px-2 rounded-2xl border border-gray-300'
-                >
-                  <div className='flex items-center justify-center w-10 h-10 bg-teal-600 rounded-full '>
-                    <FaCalendar className='text-white size-5' />
-                  </div>
-                  <span className='mr-5'>Citas</span>
-                  <FaArrowRight className='size-4' />
-                </Link>
-              </div>
-            </div>
+            <PatientActions patientId={patient.id} />
           </div>
         </div>
       </div>

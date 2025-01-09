@@ -38,9 +38,9 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
     <UserProvider>
       <div className='flex h-screen overflow-y-hidden'>
         <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-        <div className='flex flex-col flex-1'>
+        <div className='flex flex-col flex-1 max-w-full overflow-x-hidden overflow-auto'>
           <Header toggleSidebar={toggleSidebar} />
-          <main className='flex-1 py-3 px-3 sm:px-4 md:px-6 bg-gray-100 overflow-y-auto'>
+          <main className='flex-1 py-3 px-3 sm:px-4 md:px-6 bg-gray-100'>
             {children}
           </main>
         </div>

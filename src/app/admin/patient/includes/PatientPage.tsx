@@ -33,12 +33,12 @@ export const PatientPage = ({ userId }: { userId: number }) => {
   return (
     <div>
       <div className='flex justify-between items-center mb-5'>
-        <h1 className='text-3xl font-bold'>Lista de pacientes</h1>
+        <h1 className='text-xl md:text-3xl font-bold'>Lista de pacientes</h1>
         <button
           className='btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
           onClick={handleOpenModal}
         >
-          Agregar Paciente
+          Agregar
         </button>
       </div>
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>

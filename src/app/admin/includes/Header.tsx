@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { FaBars } from 'react-icons/fa';
+import { FaBars, FaSignOutAlt } from 'react-icons/fa';
 import Cookies from 'js-cookie';
 
 interface HeaderProps {
@@ -19,20 +19,23 @@ const Header = ({ toggleSidebar }: HeaderProps) => {
 
   return (
     <header className='bg-gray-800 text-white p-4 flex justify-between items-center'>
-      <button className='lg:hidden' onClick={toggleSidebar}>
-        <FaBars />
-      </button>
-      <div className='text-2xl font-bold'>Admin Panel</div>
+      <div className='flex'>
+        <button className='lg:hidden' onClick={toggleSidebar}>
+          <FaBars className='mr-2' />
+        </button>
+        <div className='text-2xl font-bold'>Admin Panel</div>
+      </div>
       <div>
-        <a href='#' className='text-gray-200 hover:text-white px-4'>
+        {/* <a href='#' className='text-gray-200 hover:text-white px-4'>
           Profile
-        </a>
+        </a> */}
         <button
           onClick={logOut}
-          className={`text-gray-200 hover:text-white px-4 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={`flex items-center text-gray-200 font-bold hover:text-red-500 px-4 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
           disabled={loading}
         >
-          Logout
+          <FaSignOutAlt className='mr-2' />
+          Salir
         </button>
       </div>
     </header>

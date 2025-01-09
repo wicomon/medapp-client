@@ -2,7 +2,12 @@
 import { Form, Formik } from 'formik';
 import { useState } from 'react';
 import { initialValues, validationSchema } from './validationForm';
-import { FormikDateTimePicker, FormikTextInput, SubmitButton } from '@/components/forms';
+import {
+  FormikDateTimePicker,
+  FormikSelectInput,
+  FormikTextInput,
+  SubmitButton,
+} from '@/components/forms';
 import { formatDateYMD } from '@/utils/dates';
 import { useMutation } from '@apollo/client';
 import { CREATE_PATIENT } from '@/graphql';
@@ -12,24 +17,27 @@ interface IProps {
   loadData: () => void;
 }
 
-export const CreatePatientForm = ({onClose, loadData}: IProps) => {
+export const CreatePatientForm = ({ onClose, loadData }: IProps) => {
   const [loading, setLoading] = useState(false);
   // add create patient mutation
-  const [createPatient] = useMutation<{patientCreate: boolean}>(CREATE_PATIENT,{
-    onCompleted: (data) => {
-      if(data && data.patientCreate){
-        alert('Paciente creado correctamente');
-        loadData()
-        onClose();
-      }
-    },
-    onError: (error) => {
-      if(error && error.message){
-        alert(error.message)
-      }
-      setLoading(false);
+  const [createPatient] = useMutation<{ patientCreate: boolean }>(
+    CREATE_PATIENT,
+    {
+      onCompleted: (data) => {
+        if (data && data.patientCreate) {
+          alert('Paciente creado correctamente');
+          loadData();
+          onClose();
+        }
+      },
+      onError: (error) => {
+        if (error && error.message) {
+          alert(error.message);
+        }
+        setLoading(false);
+      },
     }
-  });
+  );
 
   return (
     <Formik
@@ -49,7 +57,7 @@ export const CreatePatientForm = ({onClose, loadData}: IProps) => {
               createPatientInput: {
                 ...values,
                 birth: new Date(values.birth).getTime(),
-                birthString: formatDateYMD(new Date(values.birth))
+                birthString: formatDateYMD(new Date(values.birth)),
               },
             },
           });
@@ -61,7 +69,7 @@ export const CreatePatientForm = ({onClose, loadData}: IProps) => {
           //   // setLoading(false);
           // }
         } catch (error) {
-          console.log(error)
+          console.log(error);
           setLoading(false);
         }
       }}
@@ -71,63 +79,67 @@ export const CreatePatientForm = ({onClose, loadData}: IProps) => {
           <FormikTextInput
             label='Nombres'
             name='firstName'
-            className=''
+            className='w-full text-base sm:text-sm'
             type='text'
           />
         </div>
         <div className='mb-2'>
-        <FormikTextInput
+          <FormikTextInput
             label='Apellidos'
             name='lastName'
-            className=''
+            className='w-full text-base sm:text-sm'
             type='text'
           />
         </div>
         <div className='mb-2'>
-        <FormikTextInput
+          <FormikTextInput
             label='Correo'
             name='email'
-            className=''
+            className='w-full text-base sm:text-sm'
             type='email'
           />
         </div>
         <div className='mb-2'>
-        <FormikTextInput
+          <FormikTextInput
             label='Telefono'
             name='phone'
-            className=''
+            className='w-full text-base sm:text-sm'
             type='text'
           />
         </div>
         <div className='mb-2'>
-        <FormikTextInput
+          <FormikTextInput
             label='Telefono adicional'
             name='phone2'
-            className=''
+            className='w-full text-base sm:text-sm'
             type='text'
           />
         </div>
         <div className='mb-2'>
-        <FormikTextInput
+          <FormikTextInput
             label='Dirección'
             name='address'
-            className=''
+            className='w-full text-base sm:text-sm'
             type='text'
           />
         </div>
         <div className='mb-2'>
-        <FormikTextInput
+          <FormikSelectInput
             label='Género'
             name='gender'
-            className=''
+            className='w-full text-base sm:text-sm'
             type='text'
-          />
+          >
+            <option value=''>Seleccione</option>
+            <option value='M'>Masculino</option>
+            <option value='F'>Femenino</option>
+          </FormikSelectInput>
         </div>
         <div className='mb-2'>
           <FormikDateTimePicker
             label='Fecha de Nacimiento'
             name='birth'
-            className=''
+            className='w-full text-base sm:text-sm'
           />
         </div>
         <div className='flex items-center justify-between'>
