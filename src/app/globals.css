@@ -19,3 +19,9 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.date-input input{
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  /* background-color: transparent; */
+}

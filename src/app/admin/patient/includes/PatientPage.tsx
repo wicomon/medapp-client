@@ -6,15 +6,15 @@ import { IPatient } from '@/types';
 import { Modal } from '@/components/modals/Modal';
 import { PatientTable } from './PatientTable';
 import { CreatePatientForm } from './CreatePatientForm';
+import { toast, Toaster } from 'sonner';
 
 export const PatientPage = ({ userId }: { userId: number }) => {
-  const [getPatients, { data, loading, error }] = useLazyQuery<{ patientFindAll: IPatient[] }>(
-    GET_PERSON_BY_DOCTOR_ID,
-    {
-      variables: { patientFindAllId: userId },
-      fetchPolicy: 'no-cache'
-    }
-  );
+  const [getPatients, { data, loading, error }] = useLazyQuery<{
+    patientFindAll: IPatient[];
+  }>(GET_PERSON_BY_DOCTOR_ID, {
+    variables: { patientFindAllId: userId },
+    fetchPolicy: 'no-cache',
+  });
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = () => {
@@ -27,11 +27,12 @@ export const PatientPage = ({ userId }: { userId: number }) => {
   // console.log(data);
   useEffect(() => {
     getPatients();
-  }, [])
-  
+  }, []);
+
   // console.log(data)
   return (
     <div>
+      <Toaster richColors />
       <div className='flex justify-between items-center mb-5'>
         <h1 className='text-xl md:text-3xl font-bold'>Lista de pacientes</h1>
         <button
@@ -45,8 +46,13 @@ export const PatientPage = ({ userId }: { userId: number }) => {
         <div className='flex justify-between items-center mb-5'>
           <h3 className='text-3xl font-bold'>Nuevo Paciente</h3>
         </div>
-        <CreatePatientForm  onClose={handleCloseModal} loadData={() => getPatients()} />
-        
+        <CreatePatientForm
+          onClose={handleCloseModal}
+          loadData={() => {
+            toast.success('Event has been created');
+            getPatients();
+          }}
+        />
       </Modal>
       {loading ? (
         <p>loading...</p>

@@ -20,7 +20,7 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }: SidebarProps) => {
       id='sidebar'
       className={`fixed inset-y-0 left-0 transform ${
         isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-      } transition-transform duration-200 ease-in-out bg-gray-800 text-white w-64 z-30 lg:relative lg:translate-x-0 flex flex-col justify-between`}
+      } transition-transform duration-200 ease-in-out bg-gray-800 dark:bg-gray-900 text-white w-64 z-30 lg:relative lg:translate-x-0 flex flex-col justify-between`}
     >
       <div>
         <div className='p-4 flex justify-between items-center'>

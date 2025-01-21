@@ -18,7 +18,7 @@ const Header = ({ toggleSidebar }: HeaderProps) => {
   };
 
   return (
-    <header className='bg-gray-800 text-white p-4 flex justify-between items-center'>
+    <header className='bg-gray-800 dark:bg-gray-900 text-white p-4 flex justify-between items-center'>
       <div className='flex'>
         <button className='lg:hidden' onClick={toggleSidebar}>
           <FaBars className='mr-2' />

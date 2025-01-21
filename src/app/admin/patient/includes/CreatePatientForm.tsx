@@ -1,6 +1,7 @@
 'use client';
-import { Form, Formik } from 'formik';
 import { useState } from 'react';
+import { Form, Formik } from 'formik';
+import { Toaster, toast } from 'sonner';
 import { initialValues, validationSchema } from './validationForm';
 import {
   FormikDateTimePicker,
@@ -25,7 +26,6 @@ export const CreatePatientForm = ({ onClose, loadData }: IProps) => {
     {
       onCompleted: (data) => {
         if (data && data.patientCreate) {
-          alert('Paciente creado correctamente');
           loadData();
           onClose();
         }
@@ -49,6 +49,7 @@ export const CreatePatientForm = ({ onClose, loadData }: IProps) => {
         // console.log(new Date(values.birth).getTime())
         // console.log(formatDateYMD(new Date(values.birth)))
         // console.log(new Date(new Date(values.birth).getTime()))
+        // toast.success('Event has been created')
         // return;
         try {
           // let response;
@@ -75,6 +76,7 @@ export const CreatePatientForm = ({ onClose, loadData }: IProps) => {
       }}
     >
       <Form>
+      <Toaster richColors />
         <div className='mb-2'>
           <FormikTextInput
             label='Nombres'

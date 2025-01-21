@@ -6,6 +6,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import esLocale from '@fullcalendar/core/locales/es';
 import { useContext } from 'react';
 import { UserContext } from '@/context/user/UserContext';
+import { Toaster } from 'sonner';
 
 const AdminAppointmentPage = () => {
   const { user } = useContext(UserContext);
@@ -27,7 +28,7 @@ const AdminAppointmentPage = () => {
   return (
     <div className='p-4'>
       <h1 className='text-2xl font-bold mb-4'>Calendario de citas</h1>
-      <div className='bg-white shadow rounded-lg p-4'>
+      <div className='bg-white shadow rounded-lg p-4 dark:bg-gray-800'>
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           initialView='dayGridMonth'
@@ -39,7 +40,7 @@ const AdminAppointmentPage = () => {
           }}
           locale={esLocale}
           height='auto'
-          viewClassNames='w-full bg-white shadow rounded-lg p-4'
+          viewClassNames='w-full bg-white shadow rounded-lg p-4 dark:bg-gray-800'
           // themeSystem='United'
         />
       </div>

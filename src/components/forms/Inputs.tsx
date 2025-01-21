@@ -15,6 +15,7 @@ import { FormikDateTimePickerProps, InputType1, InputType2, InputTypeDatePicker 
 
 
 const formSelectStyle = 'shadow border rounded w-full py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline bg-white';
+const datePickerStyle = 'date-input shadow appearance-none border rounded  text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
 
 export const FormikTextInput = ({
   label,
@@ -243,13 +244,17 @@ export const FormikDateTimePicker = ({ label, name, className }: FormikDateTimeP
         {...field}
         value={field.value ? field.value : ''}
         onChange={(val) => setFieldValue(name, val)}
-        className={`shadow appearance-none border rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500 focus:ring-2 focus:ring-blue-500 ${className}`}
+        className={
+          meta.touched && meta.error
+            ? `${datePickerStyle} ${className}  border-red-300`
+            : `${datePickerStyle} ${className}`
+        }
         dateFormat="DD-MM-YYYY"
         initialViewDate={new Date(2000, 0, 1)}
         locale="es"
       />
       {meta.touched && meta.error ? (
-        <div className="text-red-500 text-sm mt-1">{meta.error}</div>
+        <div className="text-red-500 text-xs mt-1">{meta.error}</div>
       ) : null}
     </div>
   );

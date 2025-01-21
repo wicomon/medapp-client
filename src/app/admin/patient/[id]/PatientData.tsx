@@ -31,9 +31,9 @@ export const PatientData = ({ patient }: { patient: IPatient }) => {
         <div className='flex flex-col gap-2 md:flex-row md:gap-4 '>
           <div
             id='personal-information'
-            className='bg-white max-w-md shadow rounded-lg p-6 md:p-6 border border-gray-300 md:w-1/3'
+            className='bg-white max-w-md shadow rounded-lg p-6 md:p-6 border border-gray-300 md:w-1/3 '
           >
-            <div className='flex items-center mb-6'>
+            <div className='flex items-center mb-6 overflow-hidden'>
               <img
                 src={'https://picsum.photos/200'}
                 alt={`${patient.firstName} ${patient.lastName}`}
